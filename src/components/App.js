@@ -1,10 +1,14 @@
 import React from 'react'
+import { compose, graphql } from 'react-apollo'
+import gql from 'graphql-tag'
 
 import Sidebar from './Sidebar'
 import {
   Canvas,
   Main
 } from './styled'
+
+import Test from './test'
 
 export class App extends React.Component {
   state = {
@@ -19,10 +23,12 @@ export class App extends React.Component {
   activatePannel = (position) => this.setState({ pannel: { active: position }})
 
   render() {
+    const { sidebarOpen, toggleSidebar } = this.props
+
     return (
-      <Canvas open={this.state.open}>
-        <Sidebar pannel={this.state.pannel.active} open={this.state.open} toggle={this.toggle} pannelSw={this.activatePannel} />
-        <Main blured={this.state.open}>
+      <Canvas open={sidebarOpen}>
+        <Sidebar pannel={this.state.pannel.active} open={sidebarOpen} toggle={toggleSidebar} pannelSw={this.activatePannel} />
+        <Main blured={sidebarOpen}>
           <h2 style={{ margin: 0 }}>App</h2>
 
           <div>
@@ -31,11 +37,40 @@ export class App extends React.Component {
             <p>Et sed maiores veniam minus quod tempore, enim fugiat non culpa! Voluptatibus porro ab illum totam quo provident harum tempora doloremque corporis exercitationem, laborum cupiditate deserunt, non, nulla ex eum!</p>
           </div>
           
-          <button onClick={this.toggle}>Open</button>
+          <button onClick={toggleSidebar}>Open</button>
+
+          <br />
+
+          <Test />
         </Main>
       </Canvas>
     )
   }
 }
 
-export default App
+const query = gql`
+  query SidebarState {
+    sidebarOpen @client
+  }
+`
+
+const withQuery = graphql(query, { props: ({ data: { loading, sidebarOpen }}) => ({ sidebarOpen }) })
+
+const mutation = gql`
+  mutation ToggleSidebar {
+    toggleSidebar @client
+  }
+`
+
+const withMutation = graphql(mutation, { 
+  props: ({ mutate }) => {
+    return {
+      toggleSidebar: () => mutate()
+    }
+  }
+})
+
+export default compose(
+  withQuery,
+  withMutation
+)(App)

@@ -1,17 +1,22 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import registerServiceWorker from './registerServiceWorker'
-import { ApolloProvider } from 'react-apollo'
+import React from 'react';
+import { render } from 'react-dom';
+import { ApolloClient } from 'apollo-client';
+import { withClientState } from 'apollo-link-state';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { ApolloProvider } from 'react-apollo';
 
-import client from './app-client'
-import App from './components/App'
+import App from './components/App';
+import schema from './schema';
 import './index.css'
 
-ReactDOM.render(
-  <ApolloProvider client={client}>
-    {<App />}
-  </ApolloProvider>, 
-  document.getElementById('root')
-)
+const client = new ApolloClient({
+  link: withClientState(schema),
+  cache: new InMemoryCache(),
+});
 
-registerServiceWorker()
+render(
+  <ApolloProvider client={client}>
+    <App />
+  </ApolloProvider>,
+  document.getElementById('root'),
+);

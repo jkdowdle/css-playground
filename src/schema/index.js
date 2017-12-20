@@ -1,26 +1,5 @@
-import gql from 'graphql-tag'
+import merge from 'lodash.merge'
 
-export default {
-  Query: {
-    hello: () => 'hello',
-    sidebarOpen: () => false,
-    activePannel: () => 3
-  },
-  Mutation: {
-    toggleSidebar: () => ({}),
-    activatePannel: (_, { pannel }, { cache }) => {
+import test from './test'
 
-      const query = gql`
-        query ActivePannel {
-          activePannel @client
-        }
-      `
-
-      const prev = cache.readQuery({ query })
-
-      console.log('prev', prev)
-
-      return 55
-    }
-  }
-}
+export default merge(test)

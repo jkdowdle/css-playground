@@ -54,9 +54,12 @@ export const Ul = styled.ul`
 export const NavCirc = styled.li`
   width: 0.5rem;
   height: 0.5rem;
-  background: ${({ active, position }) => active === position ? 'green' : '#fff'};
+  background: ${({ active, position }) => active === position ? '#2196f3' : '#fff'};
   border-radius: 1rem;
   margin: 0 0.5rem;
+  &:hover {
+    cursor: pointer;
+  }
 `
 
 export const UlCirc = Ul.extend`
