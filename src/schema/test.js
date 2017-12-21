@@ -2,8 +2,7 @@ import gql from 'graphql-tag'
 
 export default {
   Query: {
-    hello: () => 'Start typing!',
-    sidebarOpen: () => false
+    hello: () => 'Start typing!'
   },
   Mutation: {
     updateHello(_, { value }, { cache }) {
@@ -13,35 +12,15 @@ export default {
         }
       `
 
-      const prev = cache.readQuery({ query })
-
-      console.log('prev', prev)
+      // const prev = cache.readQuery({ query })
 
       const data = {
         hello: value
       }
 
       cache.writeQuery({ query, data })
-    
 
       return value
-    },
-    toggleSidebar(_, args, { cache }) {
-      const query = gql`
-        query SidebarState {
-          sidebarOpen @client
-        }
-      `
-
-      const { sidebarOpen } = cache.readQuery({ query })
-
-      const data = {
-        sidebarOpen: !sidebarOpen
-      }
-
-      cache.writeQuery({ query, data })
-
-      return data.sidebarOpen
     }
   }
 }
