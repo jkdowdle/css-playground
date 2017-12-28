@@ -16,6 +16,7 @@ export const SIDEBAR_STATE = gql`
   query SidebarState {
     sidebarOpen @client
     activePannel @client
+    # sidebarState @client
   }
 `
 
@@ -28,16 +29,12 @@ export const withState = graphql(SIDEBAR_STATE, {
     }
     const view = 375
     const canvas = view * 3
-    const pos = canvas - (view * position)
-    const lleft = pos - scale[activePannel]
-    
-    const left = canvas - (view * position)
-    const rep = (canvas - (view * position)) - scale[activePannel]
+    const left = (canvas - (view * position)) - scale[activePannel]
 
-    console.log('left', rep, lleft)
+    // console.log('hehe', sidebarState)
 
     return {
-      lleft
+      left
     }
   }
 })

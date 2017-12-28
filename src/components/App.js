@@ -9,6 +9,7 @@ import {
 } from './styled'
 
 import Test from './test'
+import Comments from './Comments'
 
 export const App = ({ sidebarOpen, toggleSidebar, activePannel, activatePannel }) => {
   return (
@@ -16,11 +17,7 @@ export const App = ({ sidebarOpen, toggleSidebar, activePannel, activatePannel }
       <Sidebar pannel={activePannel} open={sidebarOpen} toggle={toggleSidebar} pannelSw={activatePannel} />
       <Main blured={sidebarOpen}>
         <h2 style={{ margin: 0 }}>App</h2>
-        <div>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi placeat minima aperiam voluptatibus quidem maxime perferendis officiis harum maiores? Quod, minima debitis! Soluta assumenda deleniti, vitae sunt id magni vero.</p>
-          <p>Maiores veniam quas fuga voluptatibus quo natus libero corrupti saepe ullam cumque autem sit unde provident facere sunt placeat laboriosam hic, sed nemo dolores voluptas ad ut assumenda nulla. Facere.</p>
-          <p>Et sed maiores veniam minus quod tempore, enim fugiat non culpa! Voluptatibus porro ab illum totam quo provident harum tempora doloremque corporis exercitationem, laborum cupiditate deserunt, non, nulla ex eum!</p>
-        </div>
+        <Comments />
         <button onClick={toggleSidebar}>Open</button>
         <br />
         <Test />

@@ -75,36 +75,8 @@ export const Pannel = styled.div`
   width: 100%;
   position: absolute;
   left: ${({ active, left, position }) => {
-    // const scale = {
-    //   3: 0,
-    //   2: 375,
-    //   1: 750,
-    // }
-    // const view = 375
-    // const canvas = view * 3
-    // const pos = canvas - (view * position)
-    // console.log('pan', lleft)
     return `${left}px`
   }};
   top: 100px;
   transition: all 300ms cubic-bezier(.694, .0482, .335, 1);
 `
-
-// export const SIDEBAR_STATE = gql`
-//   query SidebarState {
-//     sidebarOpen @client
-//     activePannel @client
-//   }
-// `
-
-// export const withState = graphql(SIDEBAR_STATE, {
-//   props: ({ data: { loading }}) => {
-//     if(loading) {
-//       return {}
-//     }
-
-//     return {
-      
-//     }
-//   }
-// })
